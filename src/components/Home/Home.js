@@ -77,7 +77,7 @@ const App = () => {
 <Button type="primary" className="butt1"  onCancel={handleCancel}>Create</Button>
     <Button className="butt2" htmlType="button" onclick={handleCancel}>Cancel</Button>
   
-    <Tag
+    {/* <Tag
       color={value}
       onMouseDown={onPreventMouseDown}
       closable={closable}
@@ -94,7 +94,7 @@ const App = () => {
     defaultValue={['gold', 'cyan']}
     style={{ width: '100%' }}
     options={options}
-  />
+  /> */}
 
 
       </Modal>
