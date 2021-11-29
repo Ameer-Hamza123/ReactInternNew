@@ -26,3 +26,34 @@ margin-top: 10%;
     height: 600px;
     width: 100% !important;
 }
+
+h2{
+
+text-align: center;
+
+}
+input{
+border-style: hidden;
+    width: 100%;
+}
+.butt1{
+
+    position: absolute;
+    left :30%
+}
+.butt2{
+
+    position: absolute;
+    left :55%
+}
+#antbut{
+
+    position: absolute;
+    left :50%
+}
+#pop{
+
+    border: solid;
+          
+}
+
