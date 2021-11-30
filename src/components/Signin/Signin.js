@@ -2,12 +2,31 @@ import { Button, Col } from "antd";
 import { Link } from "react-router-dom";
 import { Form, Input, Row } from 'antd';
 import 'antd/dist/antd.css'
-import '../all/all.css';
-const Signin = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
+import '../all/all.scss';
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { db, auth } from "../firebase/firebase";
+import { useNavigate } from "react-router";
+import { collection, getDocs } from "firebase/firestore";
 
+const Signin = () => {
+    const navigate = useNavigate();
+    const onFinish = async (values) => {
+        const email = values.email;
+        const password = values.password;
+        try {
+            const user = await signInWithEmailAndPassword(auth, email, password);
+            if (user)
+                console.log(user);
+            alert('Loged in Successfully')
+            navigate('/');
+            document.getElementsByTagName('input').value = " ";
+        } catch (error) {
+            console.log(error)
+            alert("no")
+            navigate('/signin')
+            document.getElementsByTagName('input').value = " ";
+        }
+    }
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -19,15 +38,15 @@ const Signin = () => {
                         Sign In
                     </h1>
                     <Form name="basic" initialValues={{ remember: true, }} className="m-t-10" onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off" >
-                        <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username!', },]} >
-                            <Input />
+                        <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your username!', type: 'email' },]} >
+                            <Input className="inputEmail" />
                         </Form.Item>
-
                         <Form.Item label="Password  " name="password" rules={[{ required: true, message: 'Please input your password!', },]} >
-                            <Input.Password />
+                            <Input.Password className="input" />
                         </Form.Item>
+                        <p>dont have an Account? <Link to="/signup">SignUp</Link></p>
                         <Form.Item className="m-t-10" wrapperCol={{ offset: 10, span: 4, }} >
-                            <Button type="primary" > <Link to="/signup" className="button">Signin to Signup</Link> </Button>
+                            <Button type="primary" htmlType="submit" >Signin</Button>
                         </Form.Item>
                     </Form>
                 </Col>
